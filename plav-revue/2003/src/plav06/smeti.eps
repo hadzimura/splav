@@ -1,0 +1,463 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Creator: (ImageMagick)
+%%Title: (smeti.eps)
+%%CreationDate: (Fri Feb  7 11:13:20 2003)
+%%BoundingBox: 0 0 259 200
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%Pages: 1
+%%EndComments
+
+%%BeginDefaults
+%%EndDefaults
+
+%%BeginProlog
+%
+% Display a color image.  The image is displayed in color on
+% Postscript viewers or printers that support color, otherwise
+% it is displayed as grayscale.
+%
+/DirectClassPacket
+{
+  %
+  % Get a DirectClass packet.
+  %
+  % Parameters:
+  %   red.
+  %   green.
+  %   blue.
+  %   length: number of pixels minus one of this color (optional).
+  %
+  currentfile color_packet readhexstring pop pop
+  compression 0 eq
+  {
+    /number_pixels 3 def
+  }
+  {
+    currentfile byte readhexstring pop 0 get
+    /number_pixels exch 1 add 3 mul def
+  } ifelse
+  0 3 number_pixels 1 sub
+  {
+    pixels exch color_packet putinterval
+  } for
+  pixels 0 number_pixels getinterval
+} bind def
+
+/DirectClassImage
+{
+  %
+  % Display a DirectClass image.
+  %
+  systemdict /colorimage known
+  {
+    columns rows 8
+    [
+      columns 0 0
+      rows neg 0 rows
+    ]
+    { DirectClassPacket } false 3 colorimage
+  }
+  {
+    %
+    % No colorimage operator;  convert to grayscale.
+    %
+    columns rows 8
+    [
+      columns 0 0
+      rows neg 0 rows
+    ]
+    { GrayDirectClassPacket } image
+  } ifelse
+} bind def
+
+/GrayDirectClassPacket
+{
+  %
+  % Get a DirectClass packet;  convert to grayscale.
+  %
+  % Parameters:
+  %   red
+  %   green
+  %   blue
+  %   length: number of pixels minus one of this color (optional).
+  %
+  currentfile color_packet readhexstring pop pop
+  color_packet 0 get 0.299 mul
+  color_packet 1 get 0.587 mul add
+  color_packet 2 get 0.114 mul add
+  cvi
+  /gray_packet exch def
+  compression 0 eq
+  {
+    /number_pixels 1 def
+  }
+  {
+    currentfile byte readhexstring pop 0 get
+    /number_pixels exch 1 add def
+  } ifelse
+  0 1 number_pixels 1 sub
+  {
+    pixels exch gray_packet put
+  } for
+  pixels 0 number_pixels getinterval
+} bind def
+
+/GrayPseudoClassPacket
+{
+  %
+  % Get a PseudoClass packet;  convert to grayscale.
+  %
+  % Parameters:
+  %   index: index into the colormap.
+  %   length: number of pixels minus one of this color (optional).
+  %
+  currentfile byte readhexstring pop 0 get
+  /offset exch 3 mul def
+  /color_packet colormap offset 3 getinterval def
+  color_packet 0 get 0.299 mul
+  color_packet 1 get 0.587 mul add
+  color_packet 2 get 0.114 mul add
+  cvi
+  /gray_packet exch def
+  compression 0 eq
+  {
+    /number_pixels 1 def
+  }
+  {
+    currentfile byte readhexstring pop 0 get
+    /number_pixels exch 1 add def
+  } ifelse
+  0 1 number_pixels 1 sub
+  {
+    pixels exch gray_packet put
+  } for
+  pixels 0 number_pixels getinterval
+} bind def
+
+/PseudoClassPacket
+{
+  %
+  % Get a PseudoClass packet.
+  %
+  % Parameters:
+  %   index: index into the colormap.
+  %   length: number of pixels minus one of this color (optional).
+  %
+  currentfile byte readhexstring pop 0 get
+  /offset exch 3 mul def
+  /color_packet colormap offset 3 getinterval def
+  compression 0 eq
+  {
+    /number_pixels 3 def
+  }
+  {
+    currentfile byte readhexstring pop 0 get
+    /number_pixels exch 1 add 3 mul def
+  } ifelse
+  0 3 number_pixels 1 sub
+  {
+    pixels exch color_packet putinterval
+  } for
+  pixels 0 number_pixels getinterval
+} bind def
+
+/PseudoClassImage
+{
+  %
+  % Display a PseudoClass image.
+  %
+  % Parameters:
+  %   class: 0-PseudoClass or 1-Grayscale.
+  %
+  currentfile buffer readline pop
+  token pop /class exch def pop
+  class 0 gt
+  {
+    currentfile buffer readline pop
+    token pop /depth exch def pop
+    /grays columns 8 add depth sub depth mul 8 idiv string def
+    columns rows depth
+    [
+      columns 0 0
+      rows neg 0 rows
+    ]
+    { currentfile grays readhexstring pop } image
+  }
+  {
+    %
+    % Parameters:
+    %   colors: number of colors in the colormap.
+    %   colormap: red, green, blue color packets.
+    %
+    currentfile buffer readline pop
+    token pop /colors exch def pop
+    /colors colors 3 mul def
+    /colormap colors string def
+    currentfile colormap readhexstring pop pop
+    systemdict /colorimage known
+    {
+      columns rows 8
+      [
+        columns 0 0
+        rows neg 0 rows
+      ]
+      { PseudoClassPacket } false 3 colorimage
+    }
+    {
+      %
+      % No colorimage operator;  convert to grayscale.
+      %
+      columns rows 8
+      [
+        columns 0 0
+        rows neg 0 rows
+      ]
+      { GrayPseudoClassPacket } image
+    } ifelse
+  } ifelse
+} bind def
+
+/DisplayImage
+{
+  %
+  % Display a DirectClass or PseudoClass image.
+  %
+  % Parameters:
+  %   x & y translation.
+  %   x & y scale.
+  %   label pointsize.
+  %   image label.
+  %   image columns & rows.
+  %   class: 0-DirectClass or 1-PseudoClass.
+  %   compression: 0-none or 1-RunlengthEncoded.
+  %   hex color packets.
+  %
+  gsave
+  /buffer 512 string def
+  /byte 1 string def
+  /color_packet 3 string def
+  /pixels 768 string def
+
+  currentfile buffer readline pop
+  token pop /x exch def
+  token pop /y exch def pop
+  x y translate
+  currentfile buffer readline pop
+  token pop /x exch def
+  token pop /y exch def pop
+  currentfile buffer readline pop
+  token pop /pointsize exch def pop
+  /Times-Roman findfont pointsize scalefont setfont
+  x y scale
+  currentfile buffer readline pop
+  token pop /columns exch def
+  token pop /rows exch def pop
+  currentfile buffer readline pop
+  token pop /class exch def pop
+  currentfile buffer readline pop
+  token pop /compression exch def pop
+  class 0 gt { PseudoClassImage } { DirectClassImage } ifelse
+  grestore
+} bind def
+%%EndProlog
+%%Page:  1 1
+%%PageBoundingBox: 0 0 259 200
+userdict begin
+DisplayImage
+0 0
+259 200
+12.000000
+259 200
+1
+1
+1
+1
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffe0ffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffe0ffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffe0ffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffe0ffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffe0ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffe0ffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffe0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffe0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffe0ffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffe0ffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffe0ffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffe0ffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffe0ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffe0ffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffe0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffe0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffff
+fffffffffffffffffffffffffffc0007ffffffffffffffffffffffffffe0ffffffffffff
+ffffffffffffffffffff0000103fffffffffffffffffffffffffe0ffffffffffffffffff
+ffffffffffffd003ffe003ffffffffffffffffffffffffe0ffffffffffffffffffffffff
+fffff0017fffff807fffffffffffffffffffffffe0ffffffffffffffffffffffffffff80
+2ffff3fff80fffffffffffffffffffffffe0ffffffffffffffffffffffffffff17ffe3e3
+ffff01ffffffffffffffffffffffe0fffffffffffffffffffffffffffe3f1ef3ffe7ffe0
+7fffffffffffffffffffffe0fffffffffffffffffffffffffffc701c7018e3fff80fffff
+ffffffffffffffffe0fffffffffffffffffffffffffff8c04c6800ffffff03ffffffffff
+ffffffffffe0fffffffffffffffffffffffffff9860440538039fc40ffffffffffffffff
+ffffe0fffffffffffffffffffffffffff9af46c2ff8001fe387fffffffffffffffffffe0
+fffffffffffffffffffffffffff13f87c1cffba3ff1c1fffffffffffffffffffe0ffffff
+fffffffffffffffffffff33f80cbcff9d3ff8f0fffffffffffffffffffe0ffffffffffff
+ffffffffffffffe73e403fdff8824fc387ffffffffffffffffffe0ffffffffffffffffff
+ffffffffe71e7b3ffffc0e4fe1e1ffffffffffffffffffe0ffffffffffffffffffffffff
+ffe79fe73fffff1ffff0f1ffffffffffffffffffe0ffffffffffffffffffffffffffc78f
+e73f3fff3ffcf8f8ffffffffffffffffffe0ffffffffffffffffffffffffffc3c7ff7f7f
+ff39fcfc78ffffffffffffffffffe0ffffffffffffffffffffffffffc3e1ffffffffa89c
+fc7c7fffffffffffffffffe0ffffffffffffffffffffffffff82f07fffffffc198fc7c7f
+ffffffffffffffffe0ffffffffffffffffffffffffff9c781fffffffe1fdfe7e7fffffff
+ffffffffffe0ffffffffffffffffffffffffff9e7e07ffffffe7fffc7c7fffffffffffff
+ffffe0ffffffffffffffffffffffffff13ffc1fffffffffffe7cffffffffffffffffffe0
+ffffffffffffffffffffffffff327ff03ffffffffffc7cffffffffffffffffffe0ffffff
+ffffffffffffffffffff22f7fc0ffffffffff8fcffffffffffffffffffe0ffffffffffff
+ffffffffffffff33e7ff01ffffffffc1fcffffffffffffffffffe0ffffffffffffffffff
+ffffffff3fe5ffe03ffffffe01fcffffffffffffffffffe0ffffffffffffffffffffffff
+fe7ba49ff803ffffe00ff8ffffffffffffffffffe0fffffffffffffffffffffffffe492d
+8ffe801eb4007ffcffffffffffffffffffe0fffffffffffffffffffffffffe3bffcfffe8
+00000bfff8ffffffffffffffffffe0fffffffffffffffffffffffffe7de3efffff4000bf
+fffcffffffffffffffffffe0fffffffffffffffffffffffffcc7ef8ffffffffffffffcff
+ffffffffffffffffe0fffffffffffffffffffffffffcc6ffdffffffffffffffcffffffff
+ffffffffffe0fffffffffffffffffffffffffc8cfffffffffffffffffcffffffffffffff
+ffffe0fffffffffffffffffffffffffcfffffffffffffffffff8ffffffffffffffffffe0
+fffffffffffffffffffffffff9e7fffffffffffffffff9ffffffffffffffffffe0ffffff
+fffffffffffffffffff9effffffffffffffffff9ffffffffffffffffffe0ffffffffffff
+fffffffffffff83ffffffffffffffffff9ffffffffffffffffffe0ffffffffffffffffff
+fffffffafffffffffffffffffff9ffffffffffffffffffe0ffffffffffffffffffffffff
+f33ffffffffffffffffff1ffffffffffffffffffe0fffffffffffffffffffffffff23fff
+fffffffffffffff3ffffffffffffffffffe0fffffffffffffffffffffffff2ffffffffff
+fffffffff3ffffffffffffffffffe0fffffffffffffffffffffffff3ffffffffffffffff
+fff3ffffffffffffffffffe0ffffffffffffffffffffffffe7fffffffffffffffffff3ff
+ffffffffffffffffe0ffffffffffffffffffffffffe1ffffffffffffffffffe3ffffffff
+ffffffffffe0ffffffffffffffffffffffffc3ffffffffffffffffffe7ffffffffffffff
+ffffe0ffffffffffffffffffffffffcfffffffffffffffffffe7ffffffffffffffffffe0
+ffffffffffffffffffffffffcfffffffffffffffffffe7ffffffffffffffffffe0ffffff
+ffffffffffffffffffcfffffffffffffffffffe7ffffffffffffffffffe0ffffffffffff
+ffffffffffff93ffffffffffffffffffe7ffffffffffffffffffe0ffffffffffffffffff
+ffffff9fffffffffffffffffffe7ffffffffffffffffffe0ffffffffffffffffffffffff
+9fffffffffffffffffffe7ffffffffffffffffffe0ffffffffffffffffffffffff9fffff
+ffffffffffffffe7ffffffffffffffffffe0ffffffffffffffffffffffff1fffffffffff
+ffffffffe7ffffffffffffffffffe0ffffffffffffffffffffffff3fffffffffffffffff
+ffe7ffffffffffffffffffe0ffffffffffffffffffffffff3fffffffffffffffffffcfff
+ffffffffffffffffe0ffffffffffffffffffffffff3fffffffffffffffffffe7ffffffff
+ffffffffffe0fffffffffffffffffffffffe7fffffffffffffffffffc7ffffffffffffff
+ffffe0fffffffffffffffffffffffe7fffffffffffffffffffefffffffffffffffffffe0
+fffffffffffffffffffffffe7fffffffffffffffffffcfffffffffffffffffffe0ffffff
+fffffffffffffffffe7fffffffffffffffffffcfffffffffffffffffffe0ffffffffffff
+fffffffffffcffffffffffffffffffffcfffffffffffffffffffe0ffffffffffffffffff
+fffffcffffffffffffffffffffcfffffffffffffffffffe0fffffffffffffffffffffffc
+ffffffffffffffffffffcfffffffffffffffffffe0fffffffffffffffffffffffcffffff
+ffffffffffffffcfffffffffffffffffffe0fffffffffffffffffffffff9ffffffffffff
+ffffffffcfffffffffffffffffffe0fffffffffffffffffffffff9ffffffffffffffffff
+ffcfffffffffffffffffffe0fffffffffffffffffffffff9ffffffffffffffffffffcfff
+ffffffffffffffffe0fffffffffffffffffffffff9ffffffffffffffffffffcfffffffff
+ffffffffffe0fffffffffffffffffffffff3ffffffffffffffffffffc7ffffffffffffff
+ffffe0fffffffffffffffffffffff3ffffffffffffffffffffefffffffffffffffffffe0
+fffffffffffffffffffffff3ffffffffffffffffffffc7ffffffffffffffffffe0ffffff
+fffffffffffffffff3ffffffffffffffffffffcfffffffffffffffffffe0ffffffffffff
+ffffffffffe7ffffffffffffffffffffcfffffffffffffffffffe0ffffffffffffffffff
+ffffe7ffffffffffffffffffffe7ffffffffffffffffffe0ffffffffffffffffffffffe7
+ffffffffffffffffffffe7ffffffffffffffffffe0ffffffffffffffffffffffc7ffffff
+ffffffffffffffe7ffffffffffffffffffe0ffffffffffffffffffffffcfffffffffffff
+ffffffffcfffffffffffffffffffe0ffffffffffffffffffffffcfffffffffffffffffff
+ffe7ffffffffffffffffffe0ffffffffffffffffffffffcfffffffffffffffffffffe7ff
+ffffffffffffffffe0ffffffffffffffffffffffcfffffffffffffffffffffe7ffffffff
+ffffffffffe0ffffffffffffffffffffff9fffffffffffffffffffffe7ffffffffffffff
+ffffe0ffffffffffffffffffffff9fffffffffffffffffffffe7ffffffffffffffffffe0
+ffffffffffffffffffffff9fffffffffffffffffffffe7ffffffffffffffffffe0ffffff
+ffffffffffffffff3fffffffffffffffffffffe7ffffffffffffffffffe0ffffffffffff
+ffffffffff3fffffffffffffffffffffe7ffffffffffffffffffe0ffffffffffffffffff
+ffff3fffffffffffffffffffffe7ffffffffffffffffffe0fffffffffffffffffffffe7f
+ffffffffffffffffffffefffffffffffffffffffe0ffffffbffffffffffffffe7fffffff
+ffffffffffffffe7ffffffffffffffffffe0fffffe0ffffffffffffffcffffffffffffff
+ffffffffe7ffffffffffffffffffe0fffffc03fffffffffffffcffffffffffffffffffff
+ffe7ffffffffffffffffffe0fffff8e1fffffffffffffcffffffffffffffffffffffe7ff
+ffffffffffffffffe0fffff1f8fffffffffffff9ffffffffffffffffffffffe7ffffffff
+ffffffc0ffe0ffffe3f8fffffffffffff9ffffffffffffffffffffffe3fffffffffffffe
+003fe0ffffc3fc7ffffffffffff9fffffffffffffffffffffff3fffffffffffff82e1fe0
+ffff83fe7ffffffffffff3fffffffffffffffffffffff7ffffffffffffe1ff0fe0ffff07
+fe3ffffffffffff3fffffffffffffffffffffff3ffffffffffffc3ffcfe0fffe27ff3fff
+fffffffff3fffffffffffffffffffffff3ffffffffffff0fffc7e0fffe67ff1fffffffff
+ffe27ffffffffffffffffffffff3ffffffffffff1fffc7e0fffc47ff8fffffffffffe7ff
+fffffffffffffffffffff3fffffffffffc0fffe7e0fffce7ffcfffffffffffe7ffffffff
+fffffffffffffff3fffffffffff84fffe7e0fff8cfffc7ffffffffffcfffffffffffffff
+fffffffff1fffffffffff19fffc7e0fffccfffe3ffffffffffcdffffffffffffffffffff
+fff9fffffffffff18fffe7e0fff9cfffe3fffffffff819fffffffffffffffffffffffbff
+ffffffffe68fffcfe0fff9cffff1ffffffffe01dfffffffffffffffffffffff9ffffffff
+ffc4cfffcfe0fff98fffc0ffffffff001cfffffffffffffffffffffff9ffffffffff8e0f
+ff8fe0fff9cfff0cfffffffe003cfffffffffffffffffffffff9ffffffffff8e0fff8fe0
+fff19ffe2cfffffff80e75fffffffffffffffffffffff8ffffffffff1e07ff9fe0fff98f
+f88cfffffff8cc77fffffffffffffffffffffffcffffffffff1f07ff9fe0fff38ff09c7f
+fffff9d8fffffffffffffffffffffffffdfffffffffc7103ff3fe0fff19fe93e7ffffff8
+f8effffffffffffffffffffffffcfffffffff87181fe3fe0fff19fc63e3ffffff9f9cfff
+fffffffffffffffffffffcffffffffc06088fe7fe0fff99fc4c61ffffff1d9f9ffffffff
+fffffffffffffffcfffffffe0000c03c7fe0fff39f98863ffffff9f9bfffffffffffffff
+fffffffffdfffffffc2a006208ffe0fff19f11043007fff1fcbfffffffffffffffffffff
+fffcfffffff07f000181ffe0fff18e27040403fff9fcffffffffffffffffffffffffe4ff
+ffffe0ff200843ffe0fff99e478001f1fff8fcffffffffffffffffffffffffc4fffffc00
+7f105c03ffe0fff98c8f801ff0fff8fc7cfffffffffffffffffffffffcffffc0203f107e
+03ffe0fff9c8cf023ffcfffc7e3cfffffffffffffffffffffff81ff001ff3f10ff83ffe0
+fff9c99f047ffcfffc7f3ffffffffffffffffffffffffc0f003fff3f387c0fffe0fff8c8
+3f84fffc7ffe3f1f3ffffffffffffffffffffffc40087fff1f1d3c3fffe0fff9c03f19ff
+f8003e1f8fbfffffffffffffffffffffe0e0bcffff3f1c30ffffe0fffcc07f91fff80000
+0fc7bfffffffffffffffffffffe071fc7fff9f9e81ffffe0fffcc47f31ffe3ffa007e39f
+ffffffffffffffffffffac73fc7fff8f3e43ffffe0fffc607e33ffc7ffff03f0dfffffff
+ffffffffffffff9e78ffffffcf1f43ffffe0fffce07e33ff8fffff41f8ffffffffffffff
+ffffffffbe3cffffffcf1e09ffffe0fffe787e73ff1ffffff8fc3fffffffffffffffffff
+ffce3c7fffffcf3f1dffffe0fffe79fc67ff3ffffffc3e1fffffffffffffffffffffee3e
+7fffffc73f39ffffe0fffe38fc67ff3ffffffe1f8ffffffffffffffffffffff83e3fffff
+e73e3bffffe0ffff3c7ce7fe7fffffff0787fffffffffffffffffffbf83f3fffffe63c7b
+ffffe0ffff1c7ce7fe7fffffffe3e1fffffffffffffffffffffc3f3fffffe63c7befffe0
+ffff1e38e7fe7fffffffe0f07fffffffffffffffffff783e3fffffc4707b8fffe0ffff8f
+3de7fe7ffffffffc7e3ffffffffffffffffffe283f7fffffe473185fffe0ffff8e3fc7fe
+7ffffffffc3e0fffffffffffffffffde4e3e7fffffc1c33effffe0ffffcf1fe7fe7fffff
+ffff0fc3fffffffffffffffddeec3c7fffffc18fffffffe0ffffc71fe7fe7fffffffff87
+e07fffffffffffffbde7f8fcffffff801fffffffe0ffffe78fe7fe3fffffffffe3fc0fff
+ffffffffff99ff00dcffffff803fffffffe0ffffe387e7fe7c39ffffffe0fe01ffffffff
+fff3bfc00398fffffc05ffffffffe0fffff1e7e3fe000001ffffd03fd03fffffffffff34
+0057f0fffff03fffffffffe0fffff063f1ff0544000000000ff801ffffffffff0027fe71
+ffff82ffffffffffe0fffffc00f07a27fffc00005607ff8001554002a001fffee07fe007
+ffffffffffe0fffffe1000003ffffffbbfffc1fff400000800005fffffc000007fffffff
+ffffe0ffffff8003037ffffffffffff87ffffd4945b52bffffff000017ffffffffffffe0
+ffffffe03ffffffffffffffffc0ffffffffffffffffffe1ffaffffffffffffffe0ffffff
+fd7fffffffffffffffff03fffffffffffffffff03fffffffffffffffffe0ffffffffffff
+ffffffffffffffc03fffffffffffffff81ffffffffffffffffffe0ffffffffffffffffff
+fffffffff801fffffffffffff003ffffffffffffffffffe0ffffffffffffffffffffffff
+ffff4002fffffffff4005fffffffffffffffffffe0fffffffffffffffffffffffffffff4
+0000000000000bffffffffffffffffffffe0ffffffffffffffffffffffffffffffd40002
+0110057fffffffffffffffffffffe0fffffffffffffffffffffffffffffffffff2ac4aff
+ffffffffffffffffffffffe0ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffe0ffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffe0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffe0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffe0ffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffe0ffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffe0ffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffe0ffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffe0ffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffe0ffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffe0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffe0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffe0ffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffe0ffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffe0ffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffe0ffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffe0ffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffe0
+end
+%%PageTrailer
+%%Trailer
+%%EOF

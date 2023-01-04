@@ -1,0 +1,138 @@
+% navod pro rozhozeni pro tisk:
+% vyrobit ps 
+% dvips -o plav.ps plav.dvi
+% dale pak
+% pro PS
+% pstops '4:-3(-2cm,-.7cm)+0(8.7cm,-.7cm),1(-2cm,-.7cm)+-2(8.7cm,-.7cm)' plav.ps plav1.ps
+% pro PDF 
+% pstops '4:-3(-2cm,-1.7cm)+0(9.3cm,-1.7cm),1(-2cm,-1.7cm)+-2(9.3cm,-1.7cm)' plav.ps plav2.ps
+% nasledne ps2pdf plav2.ps
+
+
+
+\documentclass{article}
+
+% rozvetveni pro pdf
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+\pdffalse
+\else
+\pdfoutput=1
+\pdftrue
+\fi
+
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[IL2]{fontenc}
+
+
+\usepackage[czech]{babel}
+\ifpdf
+\usepackage[pdftex]{graphicx}
+\else
+\usepackage{graphicx}
+\fi
+\usepackage{hyperref}
+\usepackage{color}
+
+% definice fontu
+\DeclareFontFamily{IL2}{sld}{}
+\DeclareFontShape{IL2}{sld}{m}{n}{<-> sldr8z}{}
+\DeclareFontShape{IL2}{sld}{b}{n}{<-> sldb8z}{}
+\DeclareFontShape{IL2}{sld}{m}{it}{<-> sldri8z}{}
+\DeclareFontShape{IL2}{sld}{b}{it}{<-> sldbi8z}{}
+\DeclareFontShape{IL2}{sld}{bx}{n}{<-> sub * sld/b/n}{}
+\DeclareFontShape{IL2}{sld}{bx}{it}{<-> sub * sld/b/it}{}
+\DeclareFontShape{IL2}{sld}{m}{sl}{<-> sub * sld/m/it}{}
+\DeclareFontShape{IL2}{sld}{b}{sl}{<-> sub * sld/b/it}{}
+\DeclareFontShape{IL2}{sld}{bx}{sl}{<-> sub * sld/bx/it}{}
+\DeclareFontShape{IL2}{sld}{c}{n}{<-> sldr8zc}{}
+\DeclareFontShape{IL2}{sld}{bc}{n}{<-> sldb8zc}{}
+\renewcommand{\encodingdefault}{IL2}
+\renewcommand{\rmdefault}{sld}
+
+
+\makeatletter
+% styl titulni stranky
+\def\ps@title{
+\renewcommand{\@oddhead}{\includegraphics[width=\textwidth]{obrs/pr}}
+\renewcommand{\@evenhead}{\includegraphics[width=\textwidth]{obrs/pr}}
+\renewcommand{\@evenfoot}{\includegraphics[width=\textwidth]{obrs/cara_dolni}}
+\renewcommand{\@oddfoot}{\includegraphics[width=\textwidth]{obrs/cara_dolni}\kern-\textwidth\raise1pt\hbox
+  to \textwidth{\hfill\fontsize{14}{18}\usefont{IL2}{sld}{b}{n}\selectfont\thepage\hfill}} 
+}
+
+% styl ostatnich stranek
+\def\ps@headings{
+\renewcommand{\@oddhead}{\includegraphics[width=\textwidth]{obrs/cara_horni}}
+\renewcommand{\@evenhead}{\includegraphics[width=\textwidth]{obrs/cara_horni}}
+\renewcommand{\@evenfoot}{\includegraphics[width=\textwidth]{obrs/cara_dolni}\kern-\textwidth\raise1pt\hbox
+  to \textwidth{\hfill\fontsize{14}{18}\usefont{IL2}{sld}{b}{n}\selectfont\thepage\hfill}} 
+\renewcommand{\@oddfoot}{\includegraphics[width=\textwidth]{obrs/cara_dolni}\kern-\textwidth\raise1pt\hbox
+  to \textwidth{\hfill\fontsize{14}{18}\usefont{IL2}{sld}{b}{n}\selectfont\thepage\hfill}} 
+}
+
+% definice section
+
+\renewcommand{\section}{\@startsection{subsection}%
+{5}%
+{0mm}%
+{\baselineskip}
+{\baselineskip}
+{\fontsize{20}{22}\selectfont}}
+\def\thesection{}
+\def\thechapter{}
+\def\thesubsection{}
+
+\makeatother
+
+% jak vypadaji footnoty a cislovani stranek
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\renewcommand{\thepage}{{
+\arabic{page}}}
+
+% nastaveni velikosti stranek
+
+\textheight 250mm
+\textwidth 93mm
+\topmargin -2.25cm
+\oddsidemargin 0mm
+\evensidemargin 0mm
+
+% ruzne uzitecnosti
+\def\podpis#1{\rightline{\bf~ #1}}
+\def\url#1#2{\mbox{\href{#1}{\usefont{IL2}{sld}{c}{n}\selectfont  #2}}}
+\def\bf{\bfseries}
+\def\it{\usefont{IL2}{sld}{m}{it}\selectfont}
+
+\def\hlavicka#1#2{
+\thispagestyle{title}
+\vspace*{6.2\baselineskip}
+\noindent{\hspace*{0.15cm}\color{black}\bf ~ #1 \hfill #2~~~}
+
+\vspace*{.3\baselineskip}
+}
+
+
+\begin{document}
+% nastaveni pro PDF 
+\ifpdf
+ \setlength{\pdfpagewidth}{10.5cm}
+ \setlength{\pdfpageheight}{29.6cm}
+ \setlength{\pdfhorigin}{.5cm}
+ \setlength{\pdfvorigin}{3.2cm}
+\fi
+
+\pagestyle{headings}
+\fontfamily{sld}\selectfont
+% vlastni plavy:
+\def\overfulrule{1cm}
+
+
+\input plavrevue-29/plav29
+%\input plav02/plav02
+%\input plav03/plav03
+%\input plav04/plav04
+
+\end{document}
