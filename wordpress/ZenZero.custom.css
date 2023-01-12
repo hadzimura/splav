@@ -1,0 +1,13 @@
+ul a {
+    text-decoration: underline;
+    text-decoration-color: silver;
+    -webkit-text-decoration-color: silver;
+    text-decoration-style: double;
+}
+
+ul a:hover {
+    text-decoration: underline;
+    text-decoration-color: black;
+    -webkit-text-decoration-color: black;
+    text-decoration-style: solid;
+}
