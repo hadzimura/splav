@@ -18,7 +18,7 @@ Na této stránce se nalézá kompletní vydání časopisu Splav! za rok 2016. 
 	<li>Josef Šlerka: Sobotka splaká tu</li>
 	<li>Silvie Mitlenerová: Laudatio básníkovi</li>
 	<li>redakce: Twitter recenze</li>
-	<li><a href="http://casopis.splav.cz/pdf/2016/splav-2016-07-03.pdf">elektronický text</a></li>
+	<li><a href="https://github.com/hadzimura/splav/blob/main/splav/2016/splav-2016-07-03.pdf">elektronický text</a></li>
 	<li><a href="https://www.scribd.com/document/319333363/Splav-2016-1">online čtení</a></li>
 </ul>
 
@@ -43,7 +43,7 @@ Na této stránce se nalézá kompletní vydání časopisu Splav! za rok 2016. 
 	<li>Antonín Handl: Klouzání po barcampu</li>
 	<li>Silvie Mitlenerová: Laudatio básníkovi II.</li>
 	<li>redakce: Twitter recenze</li>
-	<li><a href="http://casopis.splav.cz/pdf/2016/splav-2016-07-04.pdf">elektronický text</a></li>
+	<li><a href="https://github.com/hadzimura/splav/blob/main/splav/2016/splav-2016-07-04.pdf">elektronický text</a></li>
 	<li><a href="https://www.scribd.com/document/319333459/Splav-2016-2">online čtení</a></li>
 </ul>
 
@@ -71,7 +71,7 @@ Na této stránce se nalézá kompletní vydání časopisu Splav! za rok 2016. 
 	<li>Tereza Dardová, Jakub Fiala: O inkluzi ve Splavu</li>
 	<li>Silvie Mitlenerová: Laudatio básníkovi III.</li>
 	<li>redakce: Twitter recenze</li>
-	<li><a href="http://casopis.splav.cz/pdf/2016/splav-2016-07-05.pdf">elektronický text</a></li>
+	<li><a href="https://github.com/hadzimura/splav/blob/main/splav/2016/splav-2016-07-05.pdf">elektronický text</a></li>
 	<li><a href="https://www.scribd.com/document/319333343/Splav-2016-3">online čtení</a></li>
 </ul>
 
@@ -100,7 +100,7 @@ Na této stránce se nalézá kompletní vydání časopisu Splav! za rok 2016. 
 	<li>organizační výbor: Kittchen * zvuková dílna * koncert dnes!</li>
 	<li>Silvie Mitlenerová: Laudatio básníkovi IV.</li>
 	<li>redakce: Twitter recenze</li>
-	<li><a href="http://casopis.splav.cz/pdf/2016/splav-2016-07-06.pdf">elektronický text</a></li>
+	<li><a href="https://github.com/hadzimura/splav/blob/main/splav/2016/splav-2016-07-06.pdf">elektronický text</a></li>
 	<li><a href="https://www.scribd.com/document/319333370/Splav-2016-4">online čtení</a></li>
 </ul>
 
@@ -125,7 +125,7 @@ Na této stránce se nalézá kompletní vydání časopisu Splav! za rok 2016. 
 	<li>organizační výbor: Q jako kvíz</li>
 	<li>Silvie Mitlenerová: Laudatio básníkovi V.</li>
 	<li>redakce: Twitter recenze</li>
-	<li><a href="http://casopis.splav.cz/pdf/2016/splav-2016-07-07.pdf">elektronický text</a></li>
+	<li><a href="https://github.com/hadzimura/splav/blob/main/splav/2016/splav-2016-07-07.pdf">elektronický text</a></li>
 	<li><a href="https://www.scribd.com/document/319333434/Splav-2016-5">online čtení</a></li>
 </ul>
 
@@ -146,7 +146,7 @@ Na této stránce se nalézá kompletní vydání časopisu Splav! za rok 2016. 
 	<li>Jana Peterová: EuroSplav</li>
 	<li>Silvie Mitlenerová: Laudatio básníkovi VI.</li>
 	<li>redakce: Twitter recenze</li>
-	<li><a href="http://casopis.splav.cz/pdf/2016/splav-2016-07-08.pdf">elektronický text</a></li>
+	<li><a href="https://github.com/hadzimura/splav/blob/main/splav/2016/splav-2016-07-08.pdf">elektronický text</a></li>
 	<li><a href="https://www.scribd.com/document/319333436/Splav-2016-6">online čtení</a></li>
 </ul>
 
@@ -172,7 +172,7 @@ Na této stránce se nalézá kompletní vydání časopisu Splav! za rok 2016. 
 	<li>Edmunt Slizský: Bude happy end?</li>
 	<li>Jan Vaněk jr.: Březen, duben, všechno jedno</li>
 	<li>redakce: Twitter recenze</li>
-	<li><a href="http://casopis.splav.cz/pdf/2016/raport-2016-07-11.pdf">elektronický text</a></li>
+	<li><a href="https://github.com/hadzimura/splav/blob/main/splav/2016/raport-2016-07-11.pdf">elektronický text</a></li>
 	<li><a href="https://www.scribd.com/document/319333424/Raport-2016-1">online čtení</a></li>
 </ul>
 
@@ -186,6 +186,6 @@ Na této stránce se nalézá kompletní vydání časopisu Splav! za rok 2016. 
 	<li>Dan Moravec: Dílna rozhlasového dokumentu</li>
 	<li>Marek Šindelka: Dílna tvůrčího psaní prózy</li>
 	<li>Petr Šrámek: Dílna literární kritiky</li>
-	<li><a href="http://casopis.splav.cz/pdf/2016/splav-2016-07-11-priloha.pdf">elektronický text</a></li>
+	<li><a href="https://github.com/hadzimura/splav/blob/main/splav/2016/splav-2016-07-11-priloha.pdf">elektronický text</a></li>
 	<li><a href="https://www.scribd.com/document/319333373/Splav-2016-7-dilenska-p%C5%99iloha">online čtení</a></li>
 </ul>
